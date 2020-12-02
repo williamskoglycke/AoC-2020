@@ -1,23 +1,24 @@
-package se.skoglycke;
+package se.skoglycke.days;
+
+import se.skoglycke.Calculable;
+import se.skoglycke.Util;
 
 import java.util.stream.Stream;
 
-import static se.skoglycke.Util.getFromPath;
+public class DayTwo implements Calculable {
 
-public class DayTwo {
+    @Override
+    public String getSolution() {
 
-    public static void main(String[] args) {
+        final String[] entries = Util.getFromPath("src/main/resources/2.txt");
 
-        final String[] entries = getFromPath("resources/2.txt");
+        final long countByFirstPolicy = Stream.of(entries).filter(this::isValidForPartOne).count();
+        final long countBySecondPolicy = Stream.of(entries).filter(this::isValidForPartTwo).count();
 
-        final long countByFirstPolicy = Stream.of(entries).filter(DayTwo::isValidForPartOne).count();
-        System.out.println("Count by first policy: " + countByFirstPolicy);
-
-        final long countBySecondPolicy = Stream.of(entries).filter(DayTwo::isValidForPartTwo).count();
-        System.out.println("Count by second policy: " + countBySecondPolicy);
+        return formatAnswer(countByFirstPolicy, countBySecondPolicy);
     }
 
-    private static boolean isValidForPartOne(final String entry) {
+    private boolean isValidForPartOne(final String entry) {
 
         final String[] split = entry.split(" ");
 
@@ -38,7 +39,7 @@ public class DayTwo {
         return occurrences >= minRange && occurrences <= maxRange;
     }
 
-    private static boolean isValidForPartTwo(final String entry) {
+    private boolean isValidForPartTwo(final String entry) {
 
         final String[] split = entry.split(" ");
 
