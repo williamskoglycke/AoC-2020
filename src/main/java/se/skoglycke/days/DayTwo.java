@@ -1,11 +1,14 @@
 package se.skoglycke.days;
 
-import se.skoglycke.Calculable;
+import se.skoglycke.Adventable;
 import se.skoglycke.Util;
 
 import java.util.stream.Stream;
 
-public class DayTwo implements Calculable {
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class DayTwo implements Adventable {
 
     @Override
     public String getSolution() {
@@ -16,6 +19,13 @@ public class DayTwo implements Calculable {
         final long countBySecondPolicy = Stream.of(entries).filter(this::isValidForPartTwo).count();
 
         return formatAnswer(countByFirstPolicy, countBySecondPolicy);
+    }
+
+    @Override
+    public void test() {
+        assertTrue(isValidForPartOne("1-3 a: abcde"));
+        assertFalse(isValidForPartOne("1-3 b: cdefg"));
+        assertTrue(isValidForPartOne("2-9 c: ccccccccc"));
     }
 
     private boolean isValidForPartOne(final String entry) {

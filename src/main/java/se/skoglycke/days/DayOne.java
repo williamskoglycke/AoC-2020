@@ -1,10 +1,12 @@
 package se.skoglycke.days;
 
-import se.skoglycke.Calculable;
+import se.skoglycke.Adventable;
 import se.skoglycke.NoobiamException;
 import se.skoglycke.Util;
 
-public class DayOne implements Calculable {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class DayOne implements Adventable {
 
     @Override
     public String getSolution() {
@@ -13,6 +15,14 @@ public class DayOne implements Calculable {
         final int[] ints = Util.toInt(entries);
 
         return formatAnswer(partOne(ints), partTwo(ints));
+    }
+
+    @Override
+    public void test() {
+        int[] ints = new int[]{1721, 979, 366, 299, 675, 1456};
+
+        assertEquals(514579, (partOne(ints)));
+        assertEquals(241861950, (partTwo(ints)));
     }
 
     private int partOne(final int[] ints) {

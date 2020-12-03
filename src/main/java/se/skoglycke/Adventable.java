@@ -1,8 +1,10 @@
 package se.skoglycke;
 
-public interface Calculable {
+public interface Adventable {
 
     String getSolution() throws NoobiamException;
+
+    void test();
 
     default String formatAnswer(final Object partOne,
                                 final Object partTwo) {
