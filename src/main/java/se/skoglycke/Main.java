@@ -1,5 +1,6 @@
 package se.skoglycke;
 
+import se.skoglycke.days.DayFour;
 import se.skoglycke.days.DayOne;
 import se.skoglycke.days.DayThree;
 import se.skoglycke.days.DayTwo;
@@ -13,7 +14,8 @@ public class Main {
         final List<Adventable> adventables = List.of(
                 new DayOne(),
                 new DayTwo(),
-                new DayThree()
+                new DayThree(),
+                new DayFour()
         );
 
         try {

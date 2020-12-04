@@ -56,7 +56,7 @@ public class DayThree implements Adventable {
 
     @Override
     public void test() {
-        final String[] entries = Util.getFromPath("src/main/resources/3test.txt");
+        final String[] entries = Util.getFromPath("src/main/resources/test/3test.txt");
 
         // Part one
         assertEquals(7, getTreeHits(entries, 1, 3));
