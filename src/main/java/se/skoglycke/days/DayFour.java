@@ -88,7 +88,7 @@ public class DayFour implements Adventable {
         return Stream
                 .of(keyValue)
                 .collect(Collectors
-                        .toMap(
+                        .toMap( // "iyr:2015" > Map.of("iyr", "2015")
                                 stuff -> stuff.split(":")[0],
                                 stuff -> stuff.split(":")[1]
                         )
@@ -97,30 +97,17 @@ public class DayFour implements Adventable {
 
     private boolean checkPartOneCriteria(final Map<String, String> passportAttributes) {
 
-        final String birthYear = passportAttributes.getOrDefault(BIRTH_YEAR, EMPTY);
-        final String issueYear = passportAttributes.getOrDefault(ISSUE_YEAR, EMPTY);
-        final String expirationYear = passportAttributes.getOrDefault(EXPIRATION_YEAR, EMPTY);
-        final String height = passportAttributes.getOrDefault(HEIGHT, EMPTY);
-        final String hairColor = passportAttributes.getOrDefault(HAIR_COLOR, EMPTY);
-        final String eyeColor = passportAttributes.getOrDefault(EYE_COLOR, EMPTY);
-        final String passportId = passportAttributes.getOrDefault(PASSPORT_ID, EMPTY);
-        final String countryId = passportAttributes.getOrDefault(COUNTRY_ID, EMPTY);
-
-        final long count = Stream
+        return Stream
                 .of(
-                        birthYear,
-                        issueYear,
-                        expirationYear,
-                        height,
-                        hairColor,
-                        eyeColor,
-                        passportId,
-                        countryId
+                        passportAttributes.getOrDefault(BIRTH_YEAR, EMPTY),
+                        passportAttributes.getOrDefault(ISSUE_YEAR, EMPTY),
+                        passportAttributes.getOrDefault(EXPIRATION_YEAR, EMPTY),
+                        passportAttributes.getOrDefault(HEIGHT, EMPTY),
+                        passportAttributes.getOrDefault(HAIR_COLOR, EMPTY),
+                        passportAttributes.getOrDefault(EYE_COLOR, EMPTY),
+                        passportAttributes.getOrDefault(PASSPORT_ID, EMPTY)
                 )
-                .filter(not(String::isEmpty))
-                .count();
-
-        return count == 8 || (count == 7 && countryId.isEmpty());
+                .allMatch(not(String::isEmpty));
     }
 
     private boolean checkPartTwoCriteria(final Map<String, String> passportAttributes) {
@@ -128,6 +115,9 @@ public class DayFour implements Adventable {
         Function<String, Boolean> validBirthYear = year -> year.length() == 4 && Integer.parseInt(year) >= 1920 && Integer.parseInt(year) <= 2002;
         Function<String, Boolean> validIssueYear = year -> year.length() == 4 && Integer.parseInt(year) >= 2010 && Integer.parseInt(year) <= 2020;
         Function<String, Boolean> validExpirationYear = year -> year.length() == 4 && Integer.parseInt(year) >= 2020 && Integer.parseInt(year) <= 2030;
+        Function<String, Boolean> validHairColor = color -> color.length() == 7 && color.matches("[#][0-f]{6}");
+        Function<String, Boolean> validEyeColor = color -> List.of("amb", "blu", "brn", "gry", "grn", "hzl", "oth").contains(color);
+        Function<String, Boolean> validPassportNumber = passportNumber -> passportNumber.length() == 9;
         Function<String, Boolean> validHeight = heightAsString -> {
             final String number = NON_NUMERIC.matcher(heightAsString).replaceAll("");
             if (heightAsString.contains("cm")) {
@@ -138,14 +128,11 @@ public class DayFour implements Adventable {
             }
             return false;
         };
-        Function<String, Boolean> validHairColor = color -> color.matches("[#][0-f]{6}");
-        Function<String, Boolean> validEyeColor = color -> List.of("amb", "blu", "brn", "gry", "grn", "hzl", "oth").contains(color);
-        Function<String, Boolean> validPassportNumber = passportNumber -> passportNumber.length() == 9;
 
         final long count = passportAttributes
                 .entrySet()
                 .stream()
-                .map(entry -> {
+                .filter(entry -> {
                     if (entry.getKey().equals(BIRTH_YEAR)) return validBirthYear.apply(entry.getValue());
                     if (entry.getKey().equals(ISSUE_YEAR)) return validIssueYear.apply(entry.getValue());
                     if (entry.getKey().equals(EXPIRATION_YEAR)) return validExpirationYear.apply(entry.getValue());
@@ -155,7 +142,6 @@ public class DayFour implements Adventable {
                     if (entry.getKey().equals(PASSPORT_ID)) return validPassportNumber.apply(entry.getValue());
                     return false;
                 })
-                .filter(b -> b)
                 .count();
 
         return count == 7;
