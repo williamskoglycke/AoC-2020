@@ -6,7 +6,6 @@ import se.skoglycke.Util;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -65,17 +64,17 @@ public class Day5 implements Adventable {
         final String rowInput = input.substring(0, 7);
         final String columnInput = input.substring(7);
 
-        final int row = stuff(rowInput, 0, 127);
-        final int column = stuff(columnInput, 0, 7);
+        final int row = stuff(rowInput, 127);
+        final int column = stuff(columnInput, 7);
         final int seatId = (row * 8) + column;
 
         return new BoardingPass(row, column, seatId);
     }
 
     private int stuff(final String input,
-                      int minRange,
                       int maxRange) {
 
+        int minRange = 0;
         for (int i = 0; i < input.length(); i++) {
             final char c = input.charAt(i);
             if (c == ROW_UPPER || c == COLUMN_UPPER) {
