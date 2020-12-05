@@ -6,7 +6,7 @@ import se.skoglycke.Util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DayOne implements Adventable {
+public class Day1 implements Adventable {
 
     @Override
     public String getSolution() {

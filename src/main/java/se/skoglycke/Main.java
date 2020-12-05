@@ -1,9 +1,9 @@
 package se.skoglycke;
 
-import se.skoglycke.days.DayFour;
-import se.skoglycke.days.DayOne;
-import se.skoglycke.days.DayThree;
-import se.skoglycke.days.DayTwo;
+import se.skoglycke.days.Day4;
+import se.skoglycke.days.Day1;
+import se.skoglycke.days.Day3;
+import se.skoglycke.days.Day2;
 
 import java.util.List;
 
@@ -12,10 +12,10 @@ public class Main {
     public static void main(String[] args) {
 
         final List<Adventable> adventables = List.of(
-                new DayOne(),
-                new DayTwo(),
-                new DayThree(),
-                new DayFour()
+                new Day1(),
+                new Day2(),
+                new Day3(),
+                new Day4()
         );
 
         try {

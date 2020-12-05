@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class DayTwo implements Adventable {
+public class Day2 implements Adventable {
 
     @Override
     public String getSolution() {

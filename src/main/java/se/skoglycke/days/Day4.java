@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 import static java.util.function.Predicate.not;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DayFour implements Adventable {
+public class Day4 implements Adventable {
 
     private static final String EMPTY = "";
 
