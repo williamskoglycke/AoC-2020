@@ -4,7 +4,7 @@ import se.skoglycke.Adventable;
 import se.skoglycke.NoobiamException;
 import se.skoglycke.Util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 public class Day3 implements Adventable {
 
