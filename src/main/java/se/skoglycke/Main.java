@@ -5,6 +5,7 @@ import se.skoglycke.days.Day1;
 import se.skoglycke.days.Day3;
 import se.skoglycke.days.Day2;
 import se.skoglycke.days.Day5;
+import se.skoglycke.days.Day6;
 
 import java.util.List;
 
@@ -17,7 +18,8 @@ public class Main {
                 new Day2(),
                 new Day3(),
                 new Day4(),
-                new Day5()
+                new Day5(),
+                new Day6()
         );
 
         try {
