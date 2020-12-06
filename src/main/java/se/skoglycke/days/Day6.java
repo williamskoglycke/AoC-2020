@@ -34,11 +34,11 @@ public class Day6 implements Adventable {
                 .stream()
                 .map(s -> s.replace(" ", ""))
                 .mapToInt(s -> {
-                    final ArrayList<Character> characters = new ArrayList<>();
+                    final HashSet<Character> charSet = new HashSet<>();
                     for (final char c : s.toCharArray()) {
-                        characters.add(c);
+                        charSet.add(c);
                     }
-                    return new HashSet<>(characters).size();
+                    return charSet.size();
                 })
                 .reduce(0, Integer::sum);
     }
